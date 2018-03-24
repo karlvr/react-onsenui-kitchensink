@@ -30,7 +30,7 @@ class Dialogs extends React.Component {
   }
 
   showPopovers() {
-    this.props.navigator.pushPage({comp: Popovers});
+    this.props.navigator.pushPage({comp: Popovers, props: { key: 'popovers' }});
   }
 
   renderToolbar() {
@@ -47,11 +47,12 @@ class Dialogs extends React.Component {
         <List
           dataSource={[
             <ListItem
+              key="show-dialog"
               tappable
               onClick={this.toggleDialog.bind(this)}>
               Show dialog ({this.state.dialogOpen ? 'open' : 'closed'})
             </ListItem>,
-            <ListItem onClick={this.showPopovers.bind(this)}>
+            <ListItem key="popovers" onClick={this.showPopovers.bind(this)}>
               Popovers
             </ListItem>
           ]}
@@ -62,11 +63,13 @@ class Dialogs extends React.Component {
         <List
           dataSource={[
             <ListItem
+              key="alert"
               tappable
               onClick={ons.notification.alert.bind(null, 'Hello, world!')}>
               Alert dialog
             </ListItem>,
             <ListItem
+              key="confirmation-dialog"
               tappable
               onClick={ons.notification.confirm.bind(null, {
                 message: 'Do you like React?',
@@ -75,6 +78,7 @@ class Dialogs extends React.Component {
               Confirmation dialog
             </ListItem>,
             <ListItem
+              key="prompt-dialog"
               tappable
               onClick={ons.notification.prompt.bind(null, {
                 message: 'What is your name?'

@@ -73,6 +73,7 @@ class Animations extends React.Component {
     nav.pushPage({
       comp: MyPage,
       props: {
+        key: "my-page",
         popPage: () => nav.popPage({animation: transition, animationOptions: {duration: 0.8}})
       }
     }, {animation: transition, animationOptions: {duration: 0.8}});
@@ -94,6 +95,7 @@ class Animations extends React.Component {
           dataSource={['none', 'fade', 'slide', 'lift']}
           renderRow={(row) =>
             <ListItem
+              key={`animation-${row}`}
               tappable
               onClick={this.pushPage.bind(this, row)}>
               {capitalize(row)}

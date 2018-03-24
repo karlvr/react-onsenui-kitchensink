@@ -9,7 +9,9 @@ import {
   ListHeader,
   ListItem,
   Switch,
-  Input
+  Input,
+  Radio,
+  Checkbox
 } from 'react-onsenui';
 
 class Forms extends React.Component {
@@ -65,7 +67,7 @@ class Forms extends React.Component {
       <Page renderToolbar={this.renderToolbar}>
         <List
           dataSource={[
-            <ListItem>
+            <ListItem key="switch">
               <div className="center">
                 Switch ({this.state.switchEnabled ? 'on' : 'off'})
               </div>
@@ -76,7 +78,7 @@ class Forms extends React.Component {
                 />
               </div>
             </ListItem>,
-            <ListItem>
+            <ListItem key="disabled-switch">
               <div className="center">
                 Disabled switch
               </div>
@@ -95,9 +97,9 @@ class Forms extends React.Component {
           renderFooter={() => <ListItem>I love&nbsp;{this.state.selectedVegetable}!</ListItem>}
           renderRow={(vegetable, index) => {
             return (
-              <ListItem tappable>
+              <ListItem key={`vegetable-${index}`} tappable>
                 <label className="left">
-                  <Input inputId={'radio' + index} name="vegetable" onChange={this.setVegetable.bind(this, vegetable)} checked={this.state.selectedVegetable === vegetable} type="radio" />
+                  <Radio inputId={'radio' + index} name="vegetable" onChange={this.setVegetable.bind(this, vegetable)} checked={this.state.selectedVegetable === vegetable} />
                 </label>
                 <label htmlFor={'radio' + index} className="center">
                   {vegetable}
@@ -112,9 +114,9 @@ class Forms extends React.Component {
           renderHeader={() => <ListHeader>Checkboxes</ListHeader>}
           renderRow={(color, index) => {
             return (
-              <ListItem tappable>
+              <ListItem key={`color-${index}`} tappable>
                 <label className="left">
-                  <Input inputId={'checkbox' + index} type="checkbox" />
+                  <Checkbox inputId={'checkbox' + index} />
                 </label>
                 <label htmlFor={'checkbox' + index} className="center">
                   {color}
@@ -130,14 +132,14 @@ class Forms extends React.Component {
           renderRow={(_, index) => {
             if (index === 0) {
               return (
-                <ListItem>
+                <ListItem key={`general-${index}`}>
                   <Input value={this.state.name} onChange={this.handleNameChange.bind(this)} placeholder="Name" float />
                 </ListItem>
               );
             }
             else {
               return (
-                <ListItem>
+                <ListItem key={`general-${index}`}>
                   Hello&nbsp;{this.state.name}!
                 </ListItem>
               );

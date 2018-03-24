@@ -64,12 +64,12 @@ class SideMenu extends React.Component {
             onOpen={this.show.bind(this)}
             collapse={true}
             width={240}
-            isSwipeable={true}>
+            swipeable={true}>
             <Page>
               <List
                 dataSource={[1, 2, 3, 4]}
                 renderHeader={() => <ListHeader>Menu</ListHeader>}
-                renderRow={(i) => <ListItem modifier='longdivider' tappable>{'Menu item ' + i}</ListItem>}
+                renderRow={(i) => <ListItem key={`menu-item-${i}`} modifier='longdivider' tappable>{'Menu item ' + i}</ListItem>}
               />
             </Page>
           </SplitterSide>

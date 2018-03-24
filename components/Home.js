@@ -19,8 +19,8 @@ import SpeedDials from './SpeedDials';
 const initialPlatform = ons.platform.isAndroid() ? 'android' : 'ios';
 
 class Home extends React.Component {
-  gotoComponent(component) {
-    this.props.navigator.pushPage({comp: component});
+  gotoComponent(component, key) {
+    this.props.navigator.pushPage({comp: component, props: { key }});
   }
 
   renderToolbar() {
@@ -46,22 +46,27 @@ class Home extends React.Component {
           renderHeader={() => <ListHeader>Components</ListHeader>}
           dataSource={[{
             name: 'Pull to refresh',
-            component: PullToRefresh
+            component: PullToRefresh,
+            key: 'pull-to-refresh'
           }, {
             name: 'Infinite scroll',
-            component: InfiniteScroll
+            component: InfiniteScroll,
+            key: 'infinite-scroll'
           }, {
             name: 'Side menu',
-            component: SideMenu
+            component: SideMenu,
+            key: 'side-menu'
           }, {
             name: 'Floating action button',
-            component: FloatingActionButton
+            component: FloatingActionButton,
+            key: 'fab'
           }, {
             name: 'Speed dials',
-            component: SpeedDials
+            component: SpeedDials,
+            key: 'speed-dials'
           }]}
           renderRow={(row) =>
-            <ListItem tappable onClick={this.gotoComponent.bind(this, row.component)}>
+            <ListItem key={row.key} tappable onClick={this.gotoComponent.bind(this, row.component, row.key)}>
               {row.name}
             </ListItem>
           }

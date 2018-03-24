@@ -85,9 +85,9 @@ class PullToRefresh extends React.Component {
     );
   }
 
-  renderRow(data) {
+  renderRow(data, index) {
     return (
-      <ListItem>
+      <ListItem key={`row-${index}`}>
         <div className='left'>
           <img className='list__item__thumbnail' src={data.url} />
         </div>

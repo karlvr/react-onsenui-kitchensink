@@ -16,55 +16,56 @@ import Dialogs from './components/Dialogs';
 import Forms from './components/Forms';
 import Animations from './components/Animations';
 
-var Tabs = React.createClass({
-  renderTabs: function() {
+class Tabs extends React.Component {
+  renderTabs() {
     return [
       {
-        content: <Home navigator={this.props.navigator} />,
-        tab: <Tab label="Home" icon="ion-ios-home-outline" />
+        content: <Home key="home" navigator={this.props.navigator} />,
+        tab: <Tab key="home" label="Home" icon="ion-ios-home-outline" />
       },
       {
-        content: <Dialogs navigator={this.props.navigator} />,
-        tab: <Tab label="Dialogs" icon="ion-ios-albums-outline" />
+        content: <Dialogs key="dialogs" navigator={this.props.navigator} />,
+        tab: <Tab key="dialogs" label="Dialogs" icon="ion-ios-albums-outline" />
       },
       {
-        content: <Forms />,
-        tab: <Tab label="Forms" icon="ion-edit" />
+        content: <Forms key="forms" />,
+        tab: <Tab key="forms" label="Forms" icon="ion-edit" />
       },
       {
-        content: <Animations navigator={this.props.navigator} />,
-        tab: <Tab label="Animations" icon="ion-film-marker" />
+        content: <Animations key="animations" navigator={this.props.navigator} />,
+        tab: <Tab key="animations" label="Animations" icon="ion-film-marker" />
       }
     ];
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <Page>
         <Tabbar
-          renderTabs={this.renderTabs}
+          renderTabs={this.renderTabs.bind(this)}
         />
       </Page>
     );
   }
-});
+}
 
-var App = React.createClass({
-  renderPage: function(route, navigator) {
+class App extends React.Component {
+
+  renderPage(route, navigator) {
     route.props = route.props || {};
     route.props.navigator = navigator;
 
     return React.createElement(route.comp, route.props);
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <Navigator
-        initialRoute={{comp: Tabs}}
+        initialRoute={{comp: Tabs, props: { key: 'tabs' }}}
         renderPage={this.renderPage}
       />
     );
   }
-});
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));

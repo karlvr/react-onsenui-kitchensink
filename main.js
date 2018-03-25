@@ -69,3 +69,9 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+if (ons.platform.isIPhoneX()) { // Utility function
+  // Add empty attribute to the <html> element
+	document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+	document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+}
